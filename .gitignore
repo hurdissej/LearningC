@@ -1,0 +1,7 @@
+.*.sw*
+*.dSYM
+*.so
+*.o
+*.log
+*.db
+tags
