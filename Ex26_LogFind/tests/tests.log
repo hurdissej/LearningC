@@ -1,0 +1,5 @@
+DEBUG tests/ex26_tests.c:62: ----- RUNNING: ./tests/ex26_tests
+DEBUG tests/ex26_tests.c:55: 
+----- test_dlopen
+DEBUG tests/ex26_tests.c:56: 
+----- test_functions

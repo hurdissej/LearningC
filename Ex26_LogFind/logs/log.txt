@@ -1,0 +1,4 @@
+Some text
+logs
+super duper
+file
