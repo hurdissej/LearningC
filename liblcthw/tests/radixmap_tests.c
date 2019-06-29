@@ -1,5 +1,6 @@
 #include "minunit.h"
 #include <lcthw/datastructures/radixmap.h>
+#include "perf_test_runner.c"
 #include <time.h>
 
 static int make_random(RadixMap * map)
@@ -9,6 +10,7 @@ static int make_random(RadixMap * map)
     {
         uint32_t key = (uint32_t)(rand() | (rand() << 16));
         check(RadixMap_add(map, key, i) == 0, "Failed to add %d", key);
+        debug("Element i: %ul - Key: %u, Value %u \n", i, key, i);
     }
 
     return i;
@@ -28,8 +30,8 @@ static int check_order(RadixMap * map)
 
         if(d1.data.key > d2.data.key)
         {
-            debug("Fail: i=%u, key: %u, value %u, equals max?",
-                d1.data.key, d1.data.value, d2.data.key == UINT32_MAX
+            debug("Fail: i=%u, key: %u, value %u, key2: %d?\n",
+                i, d1.data.key, d1.data.value, d2.data.key
             );
 
             return 0;
@@ -55,6 +57,18 @@ static int test_search(RadixMap * map)
     return 1;
 error:
     return 0;
+}
+
+static char *radix_perfTest()
+{
+    size_t N = 500;
+    RadixMap * map = RadixMap_create(N);
+    mu_assert(map != NULL, "Failed to make the map");
+    mu_assert(make_random(map), "Didn't make a random map");
+    RadixMap_sort(map);
+    RadixMap_destroy(map);
+    return NULL;
+
 }
 
 static char *test_operations()
@@ -95,7 +109,7 @@ char * all_tests()
     srand(time(NULL));
 
     mu_run_test(test_operations);
-
+    RunPerformanceTest(radix_perfTest, "RADIX sort");
     return NULL;
 }
 
