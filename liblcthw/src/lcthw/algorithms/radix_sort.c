@@ -20,7 +20,7 @@ int GetMax(int *arr, int n)
             max = arr[i];
         }
     }
-    printf("Max is %d \n", max);
+    
     return max;
 }
 
@@ -55,7 +55,6 @@ void CountSort(int * arr, int n, int exp)
 {
     int output[n]; // output array 
     int i, count[10] = {0}; 
-    PrintArray(arr, n);
     
     // Store count of occurrences in count[] 
     for (i = 0; i < n; i++) 
@@ -73,8 +72,6 @@ void CountSort(int * arr, int n, int exp)
         output[count[ (arr[i]/exp)%10 ] - 1] = arr[i]; 
         count[ (arr[i]/exp)%10 ]--; 
     } 
-    PrintArray(count, 10);
-    PrintArray(output, n);
     // Copy the output array to arr[], so that arr[] now 
     // contains sorted numbers according to current digit 
     for (i = 0; i < n; i++) 
@@ -84,7 +81,6 @@ void CountSort(int * arr, int n, int exp)
 
 void radsort(int *arr, int n)
 {
-    printf("Sorting \n");
     int max = GetMax(arr, n);
 
     for (int exp = 1; max/exp > 0; exp *= 10) 
